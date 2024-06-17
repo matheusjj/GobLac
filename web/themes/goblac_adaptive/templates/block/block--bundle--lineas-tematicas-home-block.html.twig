@@ -1,0 +1,89 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - bundle: The bundle of a custom block.
+ * - view_mode: The view mode a custom block was rendered in.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{%-
+  set classes = [
+    'block',
+    'block-config-provider--' ~ configuration.provider|clean_class,
+    'block-plugin-id--' ~ plugin_id_clean|clean_class,
+    label ? 'has-title',
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+    'thematic-info'
+  ]
+-%}
+{%- set heading_id = attributes.id ~ '-title'|clean_id -%}
+<div{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}{%- if label %} role="region" aria-labelledby="{{ heading_id }}"{%- endif -%}>
+  <div class="block__inner">
+
+    {{ title_prefix }}
+    {%- if label -%}
+      <h2 {{ title_attributes.addClass('block__title').setAttribute('id', heading_id) }}><span>{{ label }}</span></h2>
+    {%- endif -%}
+    {{ title_suffix }}
+
+    {%- block content -%}
+      <div{{ content_attributes.addClass('block__content main-content') }}>
+        <div>
+            {{- content.field_lth_pre_title -}}
+            {{- content.field_lth_title -}}
+            {{- content.field_lth_summary -}}
+            <a href="{{- content.field_lth_main_link[0]['#url'] -}}" class="main-link">{{- content.field_lth_main_link[0]['#title'] -}}</a>
+        </div>
+        <div class="grid-content">
+            <div class="info-section">
+                <i class="fa-regular fa-building"></i>
+                <h2>{{- content.field_lth_category[0]['#context'].value -}}</h2>
+                <p>{{- content.field_lth_description[0]['#context'].value -}}</p>
+                <a href="{{- content.field_lth_category_links[0]['#url'] -}}">{{- content.field_lth_category_links[0]['#title'] -}}</a>  
+            </div>
+            <div class="info-section">
+                <i class="fa-solid fa-display"></i>
+                <h2>{{- content.field_lth_category[1]['#context'].value -}}</h2>
+                <p>{{- content.field_lth_description[1]['#context'].value -}}</p>
+                <a href="{{- content.field_lth_category_links[1]['#url'] -}}">{{- content.field_lth_category_links[1]['#title'] -}}</a>  
+            </div>
+            <div class="info-section">
+                <i class="fa-regular fa-hand"></i>
+                <h2>{{- content.field_lth_category[2]['#context'].value -}}</h2>
+                <p>{{- content.field_lth_description[2]['#context'].value -}}</p>
+                <a href="{{- content.field_lth_category_links[2]['#url'] -}}">{{- content.field_lth_category_links[2]['#title'] -}}</a>  
+            </div>
+            <div class="info-section">
+                <i class="fa-regular fa-eye"></i>
+                <h2>{{- content.field_lth_category[3]['#context'].value -}}</h2>
+                <p>{{- content.field_lth_description[3]['#context'].value -}}</p>
+                <a href="{{- content.field_lth_category_links[3]['#url'] -}}">{{- content.field_lth_category_links[3]['#title'] -}}</a>  
+            </div>
+        </div>
+      </div>
+    {%- endblock -%}
+
+  </div>
+</div>

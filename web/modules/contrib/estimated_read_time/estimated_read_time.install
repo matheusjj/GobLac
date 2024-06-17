@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for estimated_read_time.
+ */
+
+/**
+ * Sets the words per minute setting for each read time field.
+ */
+function estimated_read_time_update_8101() {
+  if (!$fieldStorageConfigs = \Drupal::entityTypeManager()->getStorage('field_storage_config')->loadByProperties(['type' => 'estimated_read_time'])) {
+    return;
+  }
+
+  foreach ($fieldStorageConfigs as $fieldStorage) {
+    $fieldName = $fieldStorage->getName();
+
+    if (!$fields = \Drupal::entityTypeManager()->getStorage('field_config')->loadByProperties(['field_name' => $fieldName])) {
+      continue;
+    }
+
+    foreach ($fields as $field) {
+      $field->setSetting('words_per_minute', 230);
+      $field->save();
+    }
+  }
+}

@@ -1,0 +1,12 @@
+layout_builder.component.third_party.tailwindcss_utility:
+  type: tailwind_utility
+layout_builder.section.third_party.tailwindcss_utility:
+  type: tailwind_utility
+
+tailwind_utility:
+  type: mapping
+  label: 'Layout settings'
+  mapping:
+    tailwind_classes:
+      label: 'Tailwind classes'
+      type: string

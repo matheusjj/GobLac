@@ -1,0 +1,14 @@
+tailwindcss_utility.config:
+  type: config_object
+  mapping:
+    custom_rules:
+      type: sequence
+      sequence:
+        type: sequence
+        sequence:
+          type: mapping
+          mapping:
+            rule:
+              type: string
+            atrule:
+              type: string

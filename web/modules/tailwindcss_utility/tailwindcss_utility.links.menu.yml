@@ -1,0 +1,5 @@
+tailwindcss_utility.custom_styles:
+  title: 'Tailwind styles'
+  parent: system.themes_page
+  description: 'Allows modifying Tailwind style rules.'
+  route_name: tailwindcss_utility.custom_styles

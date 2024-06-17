@@ -1,0 +1,6 @@
+name: Good Habits
+description: This module works for Good Habits
+package: Custom
+
+type: module
+core_version_requirement: ^10

@@ -1,0 +1,4 @@
+services:
+  goblacm.goblacm_service:
+    class: \Drupal\goblacm\Service\GobLacService
+    arguments: ['@database']

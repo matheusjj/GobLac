@@ -1,0 +1,9 @@
+<div class="gracias-content">
+  <h1>{{ node.field_title.value }}</h1>
+  <p>{{ node.field_sub_text.value }}</p>
+  <a href="{{ content.field_directs_to[0]['#url'] }}"
+    ><span>{{ node.field_directs_to.value[0].title }}</span
+    ><i class="fa-solid fa-arrow-right"></i>
+  </a>
+  <img src="{{ file_url(content.field_bg_image[0]['#media'].field_media_image.entity.uri.value) }}" alt="{{ content.field_bg_image[0]['#media'].field_media_image.alt }}" />
+</div>

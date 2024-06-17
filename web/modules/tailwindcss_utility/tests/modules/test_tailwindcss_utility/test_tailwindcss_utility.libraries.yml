@@ -1,0 +1,4 @@
+tailwind:
+  css:
+    theme:
+      css/app--tailwind-utilities.css?tailwind-dynamic=1: {preprocess: false}

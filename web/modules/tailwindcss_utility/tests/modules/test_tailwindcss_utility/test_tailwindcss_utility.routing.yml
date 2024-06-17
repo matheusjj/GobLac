@@ -1,0 +1,7 @@
+test_tailwindcss_utility.tailwind:
+  path: '/test-tailwind'
+  defaults:
+    _controller: '\Drupal\test_tailwindcss_utility\Controller\TestController::build'
+    _title: 'Tailwind'
+  requirements:
+    _access: 'TRUE'

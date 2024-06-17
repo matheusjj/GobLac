@@ -1,0 +1,16 @@
+<div class="complex-banner">
+  <div class="cover"></div>
+  <img src={{
+    file_url(
+      content.field_cb_cover_image[0]["#media"].field_media_image.entity.uri
+        .value
+    )
+  }}
+  alt={{ content.field_cb_cover_image[0]["#media"].field_media_image.alt | t }}
+  />
+  <div class="positioner">
+    <h2>{{ content.field_cb_title[0]["#context"]["value"] | t }}</h2>
+    <h1>{{ content.site_name ?? "GobernanzaLAC" | t }}</h1>
+    <p>{{ content.field_cb_summary[0]["#context"]["value"] | t }}</p>
+  </div>
+</div>

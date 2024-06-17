@@ -1,0 +1,6 @@
+name: GobLacMod
+description: This module works for GobLac
+package: Custom
+
+type: module
+core_version_requirement: ^10

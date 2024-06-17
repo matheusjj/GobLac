@@ -1,0 +1,22 @@
+global-styling:
+  version: 1.0
+  css:
+    theme:
+      dist/css/styles.css: {}
+
+alpine-js:     
+  js: 
+    https://cdn.jsdelivr.net/gh/alpinejs/alpine@v3.x.x/dist/alpine.min.js: {
+      type: external, 
+      minified: true 
+    }
+
+fontawesome:
+  js: 
+    https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css: {
+      type: external, 
+      minified: true 
+    }
+
+
+

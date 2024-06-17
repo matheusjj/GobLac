@@ -1,0 +1,13 @@
+name: Share Everywhere
+type: module
+description: 'Drupal social share module.'
+package: Web services
+core_version_requirement: ^9 || ^10
+configure: share_everywhere.config_form
+dependencies:
+  - drupal:path_alias
+
+# Information added by Drupal.org packaging script on 2024-04-10
+version: '3.0.0'
+project: 'share_everywhere'
+datestamp: 1712726626

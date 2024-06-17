@@ -1,0 +1,6 @@
+RuleFinder:
+  version: 1.0
+  js:
+    js/tailwindcss_utility_rule_finder.js: {}
+  dependencies:
+    - core/drupal

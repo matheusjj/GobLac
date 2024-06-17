@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #8e6ba1;
+  --secondary-color: #675b73;
+}
+
+@layer base {
+  .title-text {
+    @apply text-4xl font-bold;
+    color: #8e6ba1;
+  }
+}
+
+@layer components {
+  .primary-btn {
+    @apply text-white rounded-sm p-2;
+    background-color: var(--secondary-color);
+  }
+
+  .custom-divider {
+    @apply w-0.5 h-full border-r-2;
+    color: #b7b1bb;
+  }
+}
+
+.main-bg-color {
+  background-color: #fefffe;
+}

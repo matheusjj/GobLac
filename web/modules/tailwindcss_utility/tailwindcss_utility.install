@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the tailwindcss_utility module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Database\Database;
+use Drupal\tailwindcss_utility\TailwindRuleStorage\TailwindRuleStorageDatabase;
+
+/**
+ * Implements hook_schema().
+ */
+function tailwindcss_utility_schema(): array {
+  return TailwindRuleStorageDatabase::schemaDefinition();
+}
+
+/**
+ * Install database table for custom rules storage.
+ */
+function tailwindcss_utility_update_9201() {
+  if (!Database::getConnection()->schema()->tableExists(TailwindRuleStorageDatabase::TABLE)) {
+    foreach (TailwindRuleStorageDatabase::schemaDefinition() as $name => $table) {
+      \Drupal::database()->schema()->createTable($name, $table);
+    }
+  }
+}

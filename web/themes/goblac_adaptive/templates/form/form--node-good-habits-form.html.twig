@@ -1,0 +1,142 @@
+{#
+/**
+ * @file
+ * Theme override for a 'form' element.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the form.
+ *
+ * @see template_preprocess_form()
+ */
+#}
+<form{{ attributes.setAttribute('role', 'form').addClass('good-habits-form') }}>
+  {{ element.form_token }}
+  {{ element.form_build_id }}
+  {{ element.form_id }}
+
+  <div>
+    <h1>{{ "Comparte tu Buena Práctica o Herramienta Digital"|t }}</h1>
+    <p>{{ "Si tienes una solución innovadora o una práctica ejemplar que ha mejorado la gobernanza en tu comunidad o organización, compártela aquí. Ayuda a inspirar y capacitar a otros con tu experiencia."|t }}</p>
+  </div>
+
+  <div class="form-disposition">
+    <div>
+      {{ element.field_gh_cover_image }}
+
+      <div class="info-img-banner">
+          <i class="fa-solid fa-circle-info"></i>
+          <div>
+            <h5>{{ "Instrucciones para cargar imagen"|t }}</h5>
+            <p>
+              {{
+                "Al enviar imágenes, asegúrate de que estén en los formatos JPEG o PNG, y que no excedan los 60MB. Las dimensiones deben estar entre 1080x1080 píxeles (mínimo) y 1080x1080 píxeles (máximo), con una resolución de al menos 72 DPI."|t
+              }}
+            </p>
+          </div>
+      </div>
+
+      <div>
+        <h2>{{ "Datos de la buena práctica" | t }}</h2>
+        {{- element.field_gh_type -}}
+        {{- element.title -}}
+        {{- element.field_gh_support_text -}}
+        {{- element.field_gh_context_summary -}}
+        {{- element.field_gh_description -}}
+      </div>
+      
+      <div class="field-spacer">
+        <div class="border-card">
+          <div class="optional-field-title">
+            <h3>{{ "Resultados"|t }}</h3>
+            <span>{{ "(Opcional)"|t }}</span>
+          </div>
+          <ul>
+            <li>{{- "Explicar los impactos positivos de la práctica, cambios o mejoras logrados."|t -}}</li>
+            <li>{{- "Dar cuenta de los resultados verificables, cómo se verifican y miden los resultados."|t -}}</li>
+          </ul>
+          {{ element.field_gh_results }}
+        </div>
+
+        <div class="border-card">
+          <h3 class="card-title">{{ "Lecciones aprendidas"|t }}</h3><span class="required-field"></span>
+          <ul>
+            <li>{{- "Cómo se asegura la permanencia en el tiempo (Sostenibilidad) (desde el punto de vista financiero, económico, social, cultural medo ambiental "|t -}}</li>
+            <li>{{- "Que aprendizajes se tuvieron de la práctica"|t -}}</li>
+          </ul>
+          <p class="alt-label">{{- "Cuéntanos lo que aprendiste"|t -}}</p>
+          {{ element.field_gh_learnings }}
+        </div>
+
+        <div class="border-card">
+          <h3 class="card-title">{{- "Sección de Involucrados"|t -}}</h3><span class="required-field"></span>
+          <p>{{ "Menciona a las personas, organizaciones o comunidades que colaboraron en esta iniciativa."|t }}</p>
+          {{ element.field_actor_partner }}
+        </div>
+
+        <div class="border-card">
+          <h3 class="card-title">{{- "Puntos de contacto"|t -}}</h3><span class="required-field"></span>
+          <hr />
+          {{ element.field_gh_contact_points }}
+        </div>
+
+        <div class="border-card">
+          <h3 class="card-title">{{- "Resumen de plan de despliegue y/o metodología"|t -}}</h3><span class="required-field"></span>
+          <ul>
+            <li>{{- "Cómo puede replicarse y adaptarse la Buena Práctica o Herramienta Digital y explicar la metodología."|t -}}</li>
+          </ul>
+          <hr />
+          {{- element.field_gh_deployment_plan -}}
+        </div>
+
+        <div class="border-card">
+            <h3 class="card-title">{{ "Etiquetas relacionadas"|t }}</h3><span class="required-field"></span>
+            <hr />
+            {{- element.field_gh_tags -}}
+        </div>
+
+        <div class="border-card">
+            <h3 class="card-title">{{ "Pais"|t }}</h3><span class="required-field"></span>
+            <hr />
+            {{- element.field_gh_country -}}
+        </div>
+
+        <div class="border-card">
+          <h3 class="card-title">{{ "Tus dados"|t }}</h3><span class="required-field"></span>
+          <hr />
+          <div class="grid-form">
+            {{- element.field_gh_author_name -}}
+            {{- element.field_gh_author_nickname -}}
+            {{- element.field_gh_author_phone -}}
+            {{- element.field_gh_author_email -}}
+          </div>
+        </div>
+
+        <div class="border-card">
+          <h3 class="card-title">{{- "Galería de imágenes"|t -}}</h3><span class="required-field"></span>
+          <p>{{ "Para garantizar la mejor calidad visual y una interfaz coherente, cada galería debe contener un mínimo de 3 fotos y un máximo de 5 fotos, todas con una resolución de 1080 píxeles por 1080 píxeles."|t }}</p>
+          <hr />
+          {{ element.field_gh_image_roll }}
+        </div>
+
+        <div class="border-card">
+          <h3 class="card-title">{{ "Envíe su archivo en documento PDF"|t }}</h3>
+          <hr />
+            {{- element.field_gh_pdf_file -}}
+        </div>
+
+        {{- element.field_gh_privacy_consent -}}
+
+        {{- element.actions -}}
+      </div>
+    </div>
+    <div class="border-card">
+      <h3 class="card-title">{{ "ACCIONES"|t }}</h3>
+      <p>{{ "Debe completar todos los campos obligatorios para poder enviarlo para su aprobación."|t }}</p>
+      <hr />
+      {{- element.field_gh_thematic_category -}}
+      {{- element.field_gh_privacy_policy -}}
+      {{- element.field_gh_authors_right -}}
+    </div>
+  </div>
+</form>

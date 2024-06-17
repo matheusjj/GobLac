@@ -1,0 +1,12 @@
+good_habits.form:
+  title: 'Configure Lorem ipsum'
+  description: 'Settings for filler text generation.'
+  route_name: good_habits.form
+  parent: system.admin_config_development
+
+good_habits.admin:
+  title: 'Hello module settings'
+  description: 'example of how to make an admin settings page link'
+  parent: system.admin_config_development
+  route_name: good_habits.content
+  weight: 100

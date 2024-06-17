@@ -1,0 +1,9 @@
+name: 'Test Tailwind CSS Utility'
+type: module
+core_version_requirement: ^10
+package: Testing
+
+# Information added by Drupal.org packaging script on 2023-12-28
+version: '2.0.3'
+project: 'tailwindcss_utility'
+datestamp: 1703777047

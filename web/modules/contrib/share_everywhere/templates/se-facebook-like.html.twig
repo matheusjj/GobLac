@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Default theme implementation for Facebook like button.
+ *
+ * Available variables:
+ *  - url: The url of the page to be liked.
+ *
+ */
+#}
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v10.0" nonce="Z6yHY4ug"></script>
+<div class="fb-like" data-href="{{ url }}" data-layout="button_count" data-action="like" data-size="small" data-share="false"></div>

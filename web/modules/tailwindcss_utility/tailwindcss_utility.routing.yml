@@ -1,0 +1,23 @@
+tailwindcss_utility.custom_styles:
+  path: '/admin/appearance/tailwind'
+  defaults:
+    _form: '\Drupal\tailwindcss_utility\Form\StylesForm'
+    _title: 'Tailwind styles'
+  requirements:
+    _permission: 'administer tailwindcss_utility'
+
+tailwindcss_utility.class_autocomplete:
+  path: '/tailwind/class-autocomplete/{include_core}'
+  defaults:
+    _controller: '\Drupal\tailwindcss_utility\Controller\ClassAutocompleteController::handleAutocomplete'
+    _format: json
+  requirements:
+    _permission: 'administer tailwindcss_utility'
+
+tailwindcss_utility.add_rules_api:
+  path: '/tailwindcss-utility/add-rules-api'
+  defaults:
+    _controller: '\Drupal\tailwindcss_utility\Controller\AddRulesApi::addRules'
+    _title: 'Add rules endpoint'
+  requirements:
+    _permission: 'access tailwindcss_utility endpoint'

@@ -1,0 +1,3 @@
+<?php
+
+function good_habits_install() {}

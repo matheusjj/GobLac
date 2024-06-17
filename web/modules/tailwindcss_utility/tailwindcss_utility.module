@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\tailwindcss_utility\Form\LayoutFormsAlter;
+
+/**
+ * @file
+ * Module file for tailwindcss_utility.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tailwindcss_utility_form_layout_builder_configure_section_alter(array &$form, FormStateInterface $form_state): void {
+  \Drupal::classResolver(LayoutFormsAlter::class)->alterSectionForm($form, $form_state);
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function tailwindcss_utility_form_layout_builder_configure_block_alter(array &$form, FormStateInterface $form_state): void {
+  \Drupal::classResolver(LayoutFormsAlter::class)->alterBlockForm($form, $form_state);
+}
+
+/**
+ * Implements hook_cache_flush().
+ */
+function tailwindcss_utility_cache_flush() {
+  \Drupal::service('tailwindcss_utility.js_handler')->deleteTailwindJs();
+  \Drupal::service('tailwindcss_utility.js_handler')->fetchTailwindJs();
+}
+
+/**
+ * Implements hook_library_info_build().
+ */
+function tailwindcss_utility_library_info_build(): array {
+  $js_handler = \Drupal::service('tailwindcss_utility.js_handler');
+  return $js_handler->getLibrary();
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function tailwindcss_utility_page_attachments(array &$attachments): void {
+  \Drupal::service('tailwindcss_utility.js_handler')->addPageAttachments($attachments);
+}

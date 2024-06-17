@@ -1,0 +1,48 @@
+services:
+  http_middleware.tailwindcss_utility:
+    class: Drupal\tailwindcss_utility\StackMiddleware\Tailwind
+    arguments:
+      - '@logger.channel.tailwindcss_utility'
+      - '@tailwindcss_utility.rule_storage'
+      - '@tailwindcss_utility.js_handler'
+    tags:
+      # Set priority lower than page_cache so cached responses that are
+      # already processed will not be re-procssed.
+      - { name: http_middleware, priority: 100, responder: true }
+
+  tailwindcss_utility.js_handler:
+    class: Drupal\tailwindcss_utility\TailwindJsHandler
+    arguments:
+      - '@file_url_generator'
+      - '@file.repository'
+      - '@file_system'
+      - '@http_client'
+      - '@entity_type.manager'
+      - '@current_user'
+      - '@logger.channel.tailwindcss_utility'
+
+  tailwindcss_utility.rule_storage:
+    class: Drupal\tailwindcss_utility\RuleStorage
+    factory: ['@tailwindcss_utility.rule_storage_factory', 'get']
+    arguments: [database]
+
+  tailwindcss_utility.rule_storage_factory:
+    class: Drupal\tailwindcss_utility\RuleStorageFactory
+    arguments: ['@service_container']
+
+  cache.tailwindcss_utility:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: ['@cache_factory', 'get']
+    arguments: [tailwindcss_utility]
+
+  logger.channel.tailwindcss_utility:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: logger.factory:get
+    arguments: ['tailwindcss_utility']
+
+  tailwindcss_utility.block_component_render:
+    class: Drupal\tailwindcss_utility\EventSubscriber\SectionSubscriberRenderArray
+    tags:
+      - { name: event_subscriber }

@@ -1,0 +1,21 @@
+good_habits.settings:
+  type: config_object
+  label: 'Good Habits settings'
+  mapping:
+    good_habits:
+      type: mapping
+      mapping:
+        page_title:
+          type: text
+          label: 'Good Habits generator page title:'
+        source_text:
+          type: text
+          label: 'Source text for lorem ipsum generation:'
+
+block.settings.good_habits_block:
+  type: block_settings
+  label: 'Good Habits block'
+  mapping:
+    good_habits_block_settings:
+      type: text
+      label: 'Lorem ipsum block settings'
