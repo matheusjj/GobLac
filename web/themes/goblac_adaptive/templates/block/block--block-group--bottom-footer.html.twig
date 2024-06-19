@@ -1,7 +1,10 @@
 {% set year = 'now' | date('Y') %}
 
 <div class="bottom-footer">
-  {{ 'GobernanzaLAC @ ' ~ year ~ '. Todos los derechos reservados'|t }}
+  <hr>
+  <div class="bottom-footer-content">
+    {{ 'GobernanzaLAC @ ' ~ year ~ '. Todos los derechos reservados'|t }}
 
-  {{- content -}}
+    {{- content -}}
+  </div>
 </div>

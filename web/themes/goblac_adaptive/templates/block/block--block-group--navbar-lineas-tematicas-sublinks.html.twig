@@ -35,7 +35,7 @@
     label ? 'has-title',
     bundle ? 'block--type-' ~ bundle|clean_class,
     view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-    'basic-article'
+    'navbar-sublinks'
   ]
 -%}
 {%- set heading_id = attributes.id ~ '-title'|clean_id -%}
@@ -50,7 +50,7 @@
 
     {%- block content -%}
       <div{{ content_attributes.addClass('block__content') }}>
-        {{- content.field_body -}}
+        {{- content -}}
       </div>
     {%- endblock -%}
 
