@@ -38,7 +38,14 @@
     'thematic-info'
   ]
 -%}
+
+{% if content.field_lth_bg_image|render %}
+  {% set bg_img = file_url(content.field_lth_bg_image[0]['#media'].field_media_image.entity.uri.value) %}
+{% else %}
+  {% set bg_img = "" %}    
+{% endif %}
 {%- set heading_id = attributes.id ~ '-title'|clean_id -%}
+
 <div{{ attributes.addClass(classes)|without('role', 'aria-labelledby') }}{%- if label %} role="region" aria-labelledby="{{ heading_id }}"{%- endif -%}>
   <div class="block__inner">
 
@@ -49,7 +56,7 @@
     {{ title_suffix }}
 
     {%- block content -%}
-      <div{{ content_attributes.addClass('block__content main-content') }}>
+      <div{{ content_attributes.addClass('block__content main-content') }} style="background-image: url({{bg_img}});">
         <div>
             {{- content.field_lth_pre_title -}}
             {{- content.field_lth_title -}}

@@ -33,6 +33,10 @@
   @apply p-0;
 }
 
+input[type="checkbox"] {
+  @apply accent-[color:var(--primary-variant)];
+}
+
 @layer base {
   .text-light {
     @apply text-white;
@@ -58,12 +62,24 @@
     @apply space-y-6 my-6;
   }
 
+  .main-bg {
+    @apply bg-[color:var(--white-bg)];
+  }
+
+  .no-shadow {
+    @apply shadow-none;
+  }
+
   .button {
-    @apply font-bold text-white bg-[color:var(--accent-color)] rounded-md px-4 py-3 text-center h-auto;
+    @apply font-bold text-white bg-[color:var(--primary-color)] rounded-md px-4 py-3 text-center h-auto border-none;
   }
 
   .button-alt {
-    @apply bg-white rounded-md border-2 border-[color:var(--primary-variant)] px-4 py-3 text-center;
+    @apply bg-white rounded-md border-2 border-[color:var(--primary-variant)] px-6 py-2 text-center h-auto w-auto text-[color:var(--primary-variant)];
+
+    a {
+      @apply text-[color:var(--primary-variant)];
+    }
   }
 
   .breadcrumbs {
@@ -82,30 +98,39 @@
     @apply text-[#DDDDDC];
   }
 
+  .dashed-border {
+    @apply border-2 border-dashed border-[color:var(--primary-color)];
+  }
+
   .single-gradient {
     background: radial-gradient(
       circle at top right,
-      var(--primary-color) 0,
-      white,
-      white 50%
+      var(--primary-color) 0%,
+      #f1f3fd 50%
     );
   }
 
   .double-gradient {
     background: radial-gradient(
-        circle at 10% 0%,
-        var(--primary-color) 0,
-        rgba(255, 255, 255, 0),
-        rgba(255, 255, 255, 0),
-        rgba(255, 255, 255, 0)
+        circle 920px at right -5% bottom 20%,
+        var(--primary-color) 0%,
+        rgba(0, 0, 0, 0) 40%
       ),
       radial-gradient(
-        circle at 130% 50%,
-        var(--primary-color) 0,
-        rgba(255, 0, 0, 0),
-        rgba(255, 0, 0, 0),
-        rgba(255, 0, 0, 0)
+        circle 752px at left 10% top -30%,
+        var(--primary-color) 0%,
+        #f1f3fd 50%
       );
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
@@ -145,11 +170,11 @@
       }
 
       h6 {
-        @apply uppercase tracking-widest text-center text-[color:var(--primary-color)];
+        @apply uppercase tracking-widest text-center text-[color:var(--primary-color)] mb-4;
       }
 
       h2 {
-        @apply font-bold text-4xl text-center self-center max-w-[680px] mb-7;
+        @apply font-bold text-4xl text-center self-center max-w-[456px] mb-7;
       }
 
       p {
@@ -187,14 +212,14 @@
   }
 
   .thematic-info .main-content {
-    @apply flex flex-row w-full p-16;
+    @apply flex flex-row w-full p-16 bg-cover;
 
     .field-name-field-lth-pre-title {
       @apply text-[color:var(--primary-color)] mb-4;
     }
 
     .field-name-field-lth-title {
-      @apply font-bold text-4xl max-w-[380px] mb-6;
+      @apply font-bold text-4xl max-w-[380px] xl:w-[380px] mb-6;
     }
 
     .field-name-field-lth-summary {
@@ -202,7 +227,7 @@
     }
 
     .main-link {
-      @apply button;
+      @apply button bg-[color:var(--primary-variant)];
     }
 
     .grid-content {
@@ -225,7 +250,7 @@
       }
 
       a {
-        @apply button-alt text-[color:var(--primary-color)] max-w-[200px];
+        @apply button-alt px-2 text-[color:var(--primary-color)] max-w-[200px] bg-transparent;
       }
     }
   }
@@ -328,9 +353,6 @@
     .tb-megamenu .nav li.dropdown.active > .dropdown-toggle,
     .tb-megamenu .nav li.dropdown.open.active > .dropdown-toggle {
       @apply bg-[color:var(--primary-color)] text-white font-bold;
-
-      /* border-color: #444; */
-      /* color: #eee; */
     }
 
     .tb-megamenu .nav li.dropdown.open > .dropdown-toggle .caret,
@@ -346,28 +368,37 @@
       @apply bg-[color:var(--white-bg)] text-[color:var(--primary-variant)];
     }
 
-    .navbar-sublinks {
-      @apply grid grid-cols-2 w-full;
+    .navbar-sublinks .block__content {
+      @apply grid grid-cols-2 w-full gap-y-2 gap-x-6 place-items-stretch;
     }
 
-    .caret {
-      @apply text-[color:var(--primary-variant)];
+    .field-name-field-media-image .field-type-image__item img {
+      @apply w-40 h-28 pr-4;
     }
 
-    .tb-megamenu .nav > li > a {
-      @apply link;
+    .tb-megamenu .dropdown-menu {
+      @apply border-none;
+    }
+
+    .tb-megamenu .dropdown-menu a,
+    .tb-megamenu .dropdown-menu span.tb-megamenu-no-link {
+      @apply p-0;
+    }
+
+    .tb-megamenu .dropdown-menu .field-name-field-sublink-link {
+      @apply p-0 pt-2 underline;
+    }
+
+    .field-name-field-sublink-summary {
+      @apply w-96 line-clamp-3 whitespace-normal;
     }
 
     .navbar-sublink {
       @apply flex flex-row w-full px-2 text-black;
-
-      a {
-        @apply text-slate-800 pt-2;
-      }
     }
 
-    img {
-      @apply rounded-lg pr-4;
+    .tb-megamenu .nav > li > a {
+      @apply link;
     }
 
     h4 {
@@ -462,25 +493,49 @@
   }
 
   .homepage-info-section {
-    @apply flex flex-col w-full p-page py-28 single-gradient;
+    @apply flex flex-col w-full p-page py-28 bg-cover;
 
-    .field-name-field-hs-title {
-      @apply font-bold text-4xl max-w-[60%] m-0;
+    .info-header {
+      @apply flex flex-row w-full justify-between items-end;
+
+      .field-name-field-hs-title {
+        @apply font-bold text-[3.5rem] max-w-[868px] mb-6;
+      }
+
+      .field-name-field-hs-summary {
+        @apply text-lg max-w-[868px];
+      }
+
+      .field-name-field-hs-main-link {
+        @apply button-alt bg-transparent;
+
+        a {
+          @apply text-[color:var(--primary-variant)];
+        }
+      }
     }
 
     .homepage-info-topics {
-      @apply grid grid-cols-4 gap-2 w-full mt-20;
+      @apply grid grid-cols-4 gap-x-5 w-full mt-16;
 
-      i {
-        @apply text-[color:var(--primary-variant)] text-5xl mb-4;
-      }
+      .info-topic {
+        @apply flex flex-col w-full justify-between items-center p-6 border-2 rounded-[1.5rem];
 
-      .double-field-first {
-        @apply text-2xl mb-6;
-      }
+        .field-name-field-media-image img {
+          @apply w-[265px] h-[160px] rounded-[1rem];
+        }
 
-      .double-field-second {
-        @apply text-base;
+        .double-field-first {
+          @apply font-bold text-2xl mb-6 line-clamp-2;
+        }
+
+        .double-field-second {
+          @apply text-base line-clamp-5 mb-8;
+        }
+
+        a {
+          @apply button-alt bg-transparent;
+        }
       }
     }
   }
@@ -553,6 +608,10 @@
         @apply flex flex-col max-w-[45%];
       }
 
+      .field-type-image__figure {
+        @apply m-0;
+      }
+
       .text-content {
         @apply summary my-2;
       }
@@ -603,11 +662,11 @@
       }
 
       .field__items {
-        @apply flex flex-row space-x-3;
+        @apply grid grid-cols-3 xl:grid-cols-4 gap-3;
       }
 
       .field__item {
-        @apply m-0 max-w-[270px] font-semibold bg-[#F5F5F5] py-2 px-4 text-center;
+        @apply m-0 max-w-[270px] font-semibold bg-[#F5F5F5] py-2 px-4 text-center self-center;
       }
 
       .field__item-wrapper::after {
@@ -664,7 +723,7 @@
     }
 
     .field-node--field-gh-image-roll .field__items {
-      @apply grid grid-cols-3 gap-6 justify-items-center place-items-center px-40 py-14;
+      @apply grid grid-cols-3 gap-6 justify-items-center place-items-center px-2 xl:px-40 py-14;
 
       div,
       img {
@@ -698,10 +757,10 @@
     @apply pt-20 pb-8 space-y-16 bg-[color:var(--white-bg)] text-[color:var(--primary-black)];
 
     .top-footer {
-      @apply flex flex-row w-full justify-between items-start p-page;
+      @apply grid grid-cols-2 place-items-stretch gap-8 xl:flex xl:flex-row xl:justify-between xl:items-start w-full p-page;
 
       .branding {
-        @apply flex flex-col w-[500px] justify-start items-start;
+        @apply flex flex-col max-w-[500px] justify-start items-start;
 
         .field-name-body {
           @apply p-0 pt-4;
@@ -814,7 +873,7 @@
         @apply w-[312px];
 
         .js-form-type-checkbox {
-          @apply flex;
+          @apply flex m-0;
         }
 
         .fieldset-legend {
@@ -830,8 +889,12 @@
         }
 
         label {
-          @apply whitespace-normal bg-transparent;
+          @apply whitespace-normal bg-transparent px-3 py-4;
         }
+      }
+
+      .bef-toggle--select-all {
+        @apply pb-3;
       }
 
       .block-plugin-id--views-exposed-filter-block-good-habits-view-main,
@@ -967,6 +1030,10 @@
       @apply py-2 h-auto;
     }
 
+    label.modified {
+      @apply font-semibold text-base mb-[6px];
+    }
+
     .form-disposition {
       @apply flex flex-col-reverse items-stretch xl:flex-row w-full xl:space-x-14 xl:items-start;
 
@@ -980,10 +1047,10 @@
     }
 
     .form-radios {
-      @apply flex flex-row w-full justify-evenly;
+      @apply flex flex-row w-full justify-evenly items-center;
 
       .js-form-item-field-gh-type {
-        @apply border-2 px-6 py-2 rounded-md;
+        @apply border-2 px-6 py-2 rounded-md m-0;
       }
 
       label {
@@ -991,16 +1058,22 @@
       }
     }
 
+    .tabledrag-toggle-weight-wrapper,
+    .description,
     [for="edit-field-gh-country"],
     [for="edit-field-gh-contact-points-0-value"],
     [for="edit-field-gh-learnings-0-value"],
     [for="edit-field-gh-results-0-value"],
-    [for="edit-field-gh-deployment-plan-0-value"] {
+    [for="edit-field-gh-deployment-plan-0-value"],
+    [for="edit-field-gh-support-text-0-value"],
+    [for="edit-field-gh-description-0-value"],
+    #edit-field-gh-deployment-plan-0-format,
+    #edit-field-gh-results-0-format {
       @apply hidden;
     }
 
     .info-img-banner {
-      @apply flex flex-row w-full bg-[#F5F0F6] p-4;
+      @apply flex flex-row w-full bg-[#F5F0F6] p-4 mt-4;
 
       h5 {
         @apply font-bold text-base;
@@ -1037,22 +1110,19 @@
         @apply font-bold text-2xl inline-block;
       }
 
+      .card-title + p,
+      .card-title + span + p {
+        @apply mt-4 mb-6;
+      }
+
       .required-field::after {
         @apply text-2xl text-[#ee0000] font-serif;
 
         content: "\002A";
       }
 
-      .alt-label {
-        @apply font-semibold;
-      }
-
       ul {
-        @apply mt-6 mb-8 space-y-6 list-disc list-inside;
-      }
-
-      label {
-        @apply font-bold text-2xl;
+        @apply mt-6 mb-6 space-y-2 list-disc list-inside;
       }
 
       hr {
@@ -1072,6 +1142,27 @@
       @apply hidden;
     }
 
+    table {
+      @apply border-none;
+    }
+
+    tbody {
+      @apply border-none border-0 border-transparent;
+    }
+
+    tr.table__row {
+      @apply border-none border-0 border-transparent;
+    }
+
+    td {
+      @apply border-none;
+    }
+
+    .field-multiple-drag,
+    a.tabledrag-handle {
+      @apply hidden;
+    }
+
     .table__body__cell {
       @apply mx-auto items-center content-center;
 
@@ -1080,7 +1171,7 @@
       }
 
       .double-field-elements {
-        @apply justify-evenly items-center;
+        @apply justify-around items-center;
       }
 
       .double-field-subfield-form-item {
@@ -1089,7 +1180,7 @@
     }
 
     .form-checkboxes {
-      @apply grid grid-cols-3 gap-x-4;
+      @apply grid grid-cols-3 gap-x-4 place-items-center;
 
       .js-form-type-checkbox {
         @apply rounded-md;
@@ -1109,18 +1200,103 @@
 
       div:has(> .form-checkbox:checked) {
         label {
-          @apply bg-[color:var(--accent-color)] text-white;
+          @apply bg-[color:var(--primary-color)] text-white;
+        }
+
+        label:after {
+          content: " \2713";
         }
       }
     }
 
     .grid-form {
       @apply grid grid-cols-2 w-full gap-x-3 gap-y-6;
+
+      .field--name-field-gh-author-email {
+        @apply col-span-2;
+      }
+    }
+
+    #edit-field-gh-cover-image-wrapper,
+    #edit-field-gh-image-roll,
+    #edit-field-gh-image-roll-wrapper,
+    #edit-field-gh-pdf-file-wrapper {
+      @apply m-0 p-2 py-4 bg-[#EEEEEF] dashed-border no-scrollbar;
+
+      .js-form-type-managed-file {
+        @apply flex flex-col w-full justify-center items-center m-0;
+      }
+
+      .js-form-managed-file {
+        @apply flex flex-col w-full justify-center items-center m-0;
+      }
+
+      .image-widget-data {
+        @apply flex flex-col w-full justify-center items-center space-y-2;
+      }
+
+      .js-form-file {
+        @apply text-[color:var(--primary-color)] h-auto;
+      }
+
+      input::file-selector-button {
+        @apply button-alt bg-transparent hover:cursor-pointer border-2 font-bold border-[color:var(--primary-color)];
+      }
+
+      label[for="edit-field-gh-image-roll-0-upload"] {
+        @apply hidden;
+      }
+
+      summary[aria-controls="edit-field-gh-image-roll"],
+      summary[aria-controls^="edit-field-gh-image-roll--"] {
+        @apply hidden;
+      }
+    }
+
+    details[id^="edit-field-gh-image-roll--"] {
+      @apply no-scrollbar p-0;
+    }
+
+    #edit-field-gh-image-roll-wrapper {
+      @apply p-0;
+    }
+
+    .field--widget-image-image {
+      @apply p-0;
+    }
+
+    /* .field--name-field-gh-image-roll {
+      @apply p-0;
+
+      summary {
+        @apply hidden;
+      }
+
+      .details-wrapper {
+        @apply m-0;
+      }
+    } */
+
+    /* .field--name-field-gh-pdf-file,
+    .js-form-type-managed-file {
+      @apply flex flex-col w-full bg-[#EEEEEF] dashed-border min-h-[150px] justify-center items-center text-center m-0;
+
+      .file--mime-application-pdf {
+        @apply py-4;
+      }
+
+      label {
+        @apply hidden;
+      }
+    } */
+
+    [data-drupal-selector="edit-submit"] {
+      @apply w-full;
     }
 
     .field--name-field-gh-privacy-consent {
       .js-form-item-field-gh-privacy-consent-value {
-        @apply flex flex-row w-full;
+        @apply flex flex-row w-full m-0;
       }
 
       label {

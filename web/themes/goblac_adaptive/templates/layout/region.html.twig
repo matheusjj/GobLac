@@ -16,7 +16,8 @@
   set classes = [
     'l-r',
     'region',
-    region_row ? 'pr-' ~ region_row|clean_class ~ '__' ~ region|clean_class : region|clean_class
+    region_row ? 'pr-' ~ region_row|clean_class ~ '__' ~ region|clean_class : region|clean_class,
+    'main-bg'
   ]
 -%}
 {%- if content -%}

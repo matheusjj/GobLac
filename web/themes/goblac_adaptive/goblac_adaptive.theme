@@ -213,9 +213,6 @@ function goblac_adaptive_preprocess_block__block_group__good_habits_search_block
   $variables['content']['banner_summary'] = t('Encuentra Buenas Prácticas y Herramientas desarrolladas en la región');
 }
 
-function goblac_adaptive_preprocess_block__block_group__leaders_content(&$variables) {
-}
-
 function goblac_adaptive_preprocess_field__node__field_gh_image_roll(&$variables) {
   $items_length = count($variables['items']);
   $grid_placeholder = '<div></div>';
@@ -230,4 +227,8 @@ function goblac_adaptive_preprocess_field__node__field_gh_image_roll(&$variables
   } elseif ($items_length == 4) {
     $variables['items'][4] = $grid_placeholder;
   } else {}
+}
+
+function goblac_adaptive_form_node_good_habits_form_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state) {
+  $form['actions']['submit']['#value'] = t('Enviar para aprobación');
 }

@@ -30,26 +30,30 @@
             <h5>{{ "Instrucciones para cargar imagen"|t }}</h5>
             <p>
               {{
-                "Al enviar imágenes, asegúrate de que estén en los formatos JPEG o PNG, y que no excedan los 60MB. Las dimensiones deben estar entre 1080x1080 píxeles (mínimo) y 1080x1080 píxeles (máximo), con una resolución de al menos 72 DPI."|t
+                "Arrastra y suelta un archivo o explora en tu ordenador para subir la imagen principal de tu buena práctica o herramienta. Aceptamos formatos JPEG y PNG, con un tamaño máximo de 5MB."|t
               }}
             </p>
           </div>
       </div>
 
       <div>
-        <h2>{{ "Datos de la buena práctica" | t }}</h2>
+        <h2>{{ "Datos de la Buena Práctica o Herramienta Digital" | t }}</h2>
         {{- element.field_gh_type -}}
         {{- element.title -}}
+
+        <label for="" class="js-form-required form-required modified">{{ "Cree un texto de soporte para el nombre"|t }}</label>
         {{- element.field_gh_support_text -}}
         {{- element.field_gh_context_summary -}}
+
+        <label for="" class="js-form-required form-required modified">{{ "Descripción de la Buena Práctica o Herramienta Digital"|t }}</label>
+
         {{- element.field_gh_description -}}
       </div>
       
       <div class="field-spacer">
         <div class="border-card">
           <div class="optional-field-title">
-            <h3>{{ "Resultados"|t }}</h3>
-            <span>{{ "(Opcional)"|t }}</span>
+          <h3 class="card-title">{{ "Resultados"|t }}</h3><span class="required-field"></span>
           </div>
           <ul>
             <li>{{- "Explicar los impactos positivos de la práctica, cambios o mejoras logrados."|t -}}</li>
@@ -61,11 +65,17 @@
         <div class="border-card">
           <h3 class="card-title">{{ "Lecciones aprendidas"|t }}</h3><span class="required-field"></span>
           <ul>
-            <li>{{- "Cómo se asegura la permanencia en el tiempo (Sostenibilidad) (desde el punto de vista financiero, económico, social, cultural medo ambiental "|t -}}</li>
+            <li>{{- "Cómo se asegura la permanencia en el tiempo (Sostenibilidad) (desde el punto de vista financiero, económico, social, cultural medo ambiental)"|t -}}</li>
             <li>{{- "Que aprendizajes se tuvieron de la práctica"|t -}}</li>
           </ul>
-          <p class="alt-label">{{- "Cuéntanos lo que aprendiste"|t -}}</p>
+          <label class="modified">{{- "Cuéntanos lo que aprendiste"|t -}}</label>
           {{ element.field_gh_learnings }}
+        </div>
+
+        <div class="border-card">
+            <h3 class="card-title">{{ "Seleccione las etiquetas relacionadas"|t }}</h3><span class="required-field"></span>
+            <hr />
+            {{- element.field_gh_tags -}}
         </div>
 
         <div class="border-card">
@@ -87,12 +97,6 @@
           </ul>
           <hr />
           {{- element.field_gh_deployment_plan -}}
-        </div>
-
-        <div class="border-card">
-            <h3 class="card-title">{{ "Etiquetas relacionadas"|t }}</h3><span class="required-field"></span>
-            <hr />
-            {{- element.field_gh_tags -}}
         </div>
 
         <div class="border-card">
@@ -120,14 +124,15 @@
         </div>
 
         <div class="border-card">
-          <h3 class="card-title">{{ "Envíe su archivo en documento PDF"|t }}</h3>
+          <h3 class="card-title">{{ "Envíe su archivo en documento Word"|t }}</h3><span class="required-field"></span>
           <hr />
             {{- element.field_gh_pdf_file -}}
         </div>
 
-        {{- element.field_gh_privacy_consent -}}
+        <div class="border-card">
+          {{- element.field_gh_privacy_consent -}}
+        </div>
 
-        {{- element.actions -}}
       </div>
     </div>
     <div class="border-card">
@@ -137,6 +142,7 @@
       {{- element.field_gh_thematic_category -}}
       {{- element.field_gh_privacy_policy -}}
       {{- element.field_gh_authors_right -}}
+      {{- element.actions -}}
     </div>
   </div>
 </form>

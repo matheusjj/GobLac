@@ -76,7 +76,8 @@
     node.isSticky() ? 'node--sticky',
     not node.isPublished() ? 'node--unpublished',
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    'good-habits-content'
+    'good-habits-content',
+    'no-shadow'
   ]
 -%}
 <article{{ attributes.addClass(classes).setAttribute('role', 'article') }}>

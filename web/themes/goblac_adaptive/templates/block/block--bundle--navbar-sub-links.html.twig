@@ -1,9 +1,10 @@
 <div class="navbar-sublink">
-  {{ content.field_sublink_image }}
-  <div class="navbar-sublink-text">
-    <h4>{{ content.field_sublink_title }}</h4>
-    <p>{{ content.field_sublink_summary }}</p>
-    {{ content.field_sublink_link }}
-  </div>
+  <a class="link-area" href="{{- content.field_sublink_link[0]['#url'] -}}">
+    {{ content.field_sublink_image }}
+    <div class="navbar-sublink-text">
+      <h4>{{ content.field_sublink_title }}</h4>
+      <p>{{ content.field_sublink_summary }}</p>
+      {{ content.field_sublink_link }}
+    </div>
+  </a>
 </div>
-{# {{ dump() }} #}

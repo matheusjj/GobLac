@@ -1,25 +1,51 @@
-<div class="homepage-info-section">
-    {{ content.field_hs_title }}
+{% if content.field_bg_image|render %}
+  {% set bg_img = file_url(content.field_bg_image[0]['#media'].field_media_image.entity.uri.value) %}
+{% else %}
+  {% set bg_img = "" %}    
+{% endif %}
 
-    <div class="homepage-info-topics">
-        <div class="info-topic">
-            <i class="fa-solid fa-calendar-days"></i>
-            {{- content.field_hs_topics[0] -}}
-        </div>
-
-        <div class="info-topic">
-            <i class="fa-solid fa-briefcase"></i>
-            {{- content.field_hs_topics[1] -}}
-        </div>
-
-        <div class="info-topic">
-            <i class="fa-solid fa-heart-pulse"></i>
-            {{- content.field_hs_topics[2] -}}
-        </div>
-
-        <div class="info-topic">
-            <i class="fa-solid fa-car"></i>
-            {{- content.field_hs_topics[3] -}}
-        </div>
+<div class="homepage-info-section" style="background-image: url({{bg_img}});">
+  <div class="info-header">
+    <div>
+      {{- content.field_hs_title -}}
+      {{- content.field_hs_summary -}}
     </div>
+    <div>
+      {{- content.field_hs_main_link -}}
+    </div>
+  </div>
+
+  <div class="homepage-info-topics">
+    <div class="info-topic">
+      <div>
+        {{- content.field_hs_topic_images[0] -}}
+        {{- content.field_hs_topics[0] -}}
+      </div>
+      {{- content.field_hs_topic_links[0] -}}
+    </div>
+
+    <div class="info-topic">
+      <div>
+        {{- content.field_hs_topic_images[1] -}}
+        {{- content.field_hs_topics[1] -}}
+      </div>
+      {{- content.field_hs_topic_links[1] -}}
+    </div>
+
+    <div class="info-topic">
+      <div>
+        {{- content.field_hs_topic_images[2] -}}
+        {{- content.field_hs_topics[2] -}}
+      </div>
+      {{- content.field_hs_topic_links[2] -}}
+    </div>
+
+    <div class="info-topic">
+      <div>
+        {{- content.field_hs_topic_images[3] -}}
+        {{- content.field_hs_topics[3] -}}
+      </div>
+      {{- content.field_hs_topic_links[3] -}}
+    </div>
+  </div>
 </div>

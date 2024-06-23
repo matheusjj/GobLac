@@ -1,3 +1,4 @@
 .ddev
 vendor
 .env
+/web/sites/default/settings.php
