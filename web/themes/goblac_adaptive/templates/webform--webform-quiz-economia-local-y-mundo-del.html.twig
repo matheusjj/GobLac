@@ -1,0 +1,71 @@
+{#
+/**
+ * @file
+ * Theme implementation for a 'webform' element.
+ *
+ * This is an copy of the webform.html.twig theme_wrapper which includes the
+ * 'title_prefix' and 'title_suffix' variables needed for
+ * contextual links to appear.
+ *
+ * Available variables
+ * - attributes: A list of HTML attributes for the wrapper element.
+ * - children: The child elements of the webform.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_webform()
+ * @see _webform_form_after_build()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set bg_img = null %}
+
+{% for k, v in element['#bg_img_url'] %}
+  {% if k[1:] in element.progress["#current_page"] %}
+    {% set bg_img = v %}
+  {% endif %}
+{% endfor %}
+
+{% set quiz_title = null %}
+
+{% for k, v in element['#quiz_title'] %}
+  {% if k[1:] in element.progress["#current_page"] %}
+    {% set quiz_title = v %}
+  {% endif %}
+{% endfor %}
+
+{% set bg_cls = null %}
+
+{% for k, v in element['#bg_cls'] %}
+  {% if k[1:] in element.progress["#current_page"] %}
+    {% set bg_cls = v %}
+  {% endif %}
+{% endfor %}
+
+<form{{ attributes }}>
+  <div class="{{"quiz" ~ " " ~ bg_cls}}">
+    <div class="quiz-question">
+      <div class="quiz-header">
+        <div class="top-header">
+          {{ quiz_title }}
+          <span class="progress-indicator">{{ element.progress }}</span>
+        </div>
+
+        <div class="bottom-header">
+          <span class="progress-bar-indicator">{{ element.progress }}</span>
+        </div>
+      </div>
+
+      {{ title_prefix }}
+      {{ children }}
+      {{ title_suffix }}
+    </div>
+    <div class="img-container">
+      <img class="quiz-img" src="{{bg_img}}" alt="Quiz image">
+    </div>
+  </div>
+</form>

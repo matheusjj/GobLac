@@ -6,6 +6,8 @@
 
 use Drupal\Component\Utility\Xss;
 use Drupal\Component\Utility\Html;
+use Drupal\media\Entity\Media;
+use Drupal\file\Entity\File;
 
 /**
  * Add dynamic library definitions.
@@ -182,11 +184,8 @@ function goblac_adaptive_theme_suggestions_block_alter(array &$suggestions, arra
     $variables['elements']['img_align'] = $variables['elements']['content']['field_ifs_image_alignment'][0]['#markup'] ? 'content-left' : 'content-right';
 
     $variables['elements']['text_align'] = $variables['elements']['content']['field_ifs_image_alignment'][0]['#markup'] ? 'content-right' : 'content-left';
-
-    //dump($variables);
-    }
-
   }
+}
 
 /**
  * Implements hook_preprocess_HOOK() for node.html.twig.
@@ -204,8 +203,6 @@ function goblac_adaptive_preprocess_block__bundle__info_section(&$variables) {
     $variables['content_attributes']['class'] = $flex_row_direction;
 
     $variables['elements']['text_color_scheme'] = $is_text_color_scheme_dark ? 'text-dark' : 'text-light';
-
-    //dump($variables);
 }
 
 function goblac_adaptive_preprocess_block__block_group__good_habits_search_block(&$variables) {
@@ -231,4 +228,106 @@ function goblac_adaptive_preprocess_field__node__field_gh_image_roll(&$variables
 
 function goblac_adaptive_form_node_good_habits_form_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state) {
   $form['actions']['submit']['#value'] = t('Enviar para aprobación');
+}
+
+function goblac_adaptive_form_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state, $form_id) {
+  \Drupal::service('honeypot')->addFormProtection($form, $form_state, ['honeypot', 'time_restriction']);
+
+  if ($form_id === "webform_submission_quiz_economia_local_y_mundo_del_add_form") {
+    $img_mids = array(
+      "ihd_question" => array("Implementación de herramientas digitales", 32),
+      "macc_question" => array("Medio Ambiente y Cambio climático", 33),
+      "dhd_question" => array("Derechos Humanos y Democracia", 34),
+      "elmt_question" => array("Economía local y mundo del trabajo", 31)
+    );
+
+    $form['#bg_cls'] = array(
+      "#ihd_question" => "bg-blue",
+      "#macc_question" => "bg-green",
+      "#dhd_question" => "bg-purple",
+      "#elmt_question" => "bg-red",
+    );
+
+    foreach($img_mids as $k => $v) {
+      $media = Media::load($v[1]);
+      $fid = $media->getSource()->getSourceFieldValue($media);
+      $file = File::load($fid);
+
+      $url = $file->createFileUrl();
+      $img_array_key = "#" . $k;
+      $form['#bg_img_url'][$img_array_key] = $url;
+      $form['#quiz_title'][$img_array_key] = t($v[0]);
+    }
+  }
+}
+
+function goblac_adaptive_preprocess_webform_confirmation(&$variables) {
+  $media = Media::load(36);
+  $fid = $media->getSource()->getSourceFieldValue($media);
+  $file = File::load($fid);
+  $url = $file->createFileUrl();
+
+  $variables['element']['#bg_img_url'] = $url;
+
+  $form_summary = [];
+  $questions_data = ((array) $variables['webform'])["\x00*\x00elementsDecoded"]; 
+
+  foreach($questions_data as $k => $v) {
+    $questions_array = array_map(function($question) {
+      return $question;
+    }, array_keys($v));
+
+    $form_summary[$k] = end($questions_array);
+  }
+
+  $form_answers = ((array) $variables['webform_submission'])["\x00*\x00data"];
+
+  $form_sum = [];
+  foreach($form_summary as $k => $v) {
+    if ($form_answers[$v] === 'No aplica') {
+      $form_sum[$k] = true;
+    } else {
+      $form_sum[$k] = false;
+    }
+  }
+
+  $form_sum[array_key_first($form_sum)] = true; 
+
+  $end_msg = null;
+  $is_all_answers_correct = array_reduce(array_values($form_sum), function($result, $element) {
+      return $result && $element;
+    }, true);
+
+  if ($is_all_answers_correct) {
+    $end_msg = '¡Felicitaciones, acertaste todo! ¡Estás listo!';
+  } else {
+    $end_msg = 'Felicitaciones, lo hiciste bien, pero aún hay espacio para mejoras.';
+  }
+
+  $variables['element']['#end_msg'] = t($end_msg);
+
+  $theme_lines = array_unique(array_map(function($theme_line) {
+    return substr($theme_line, 0, -2);
+  }, array_keys($form_sum)));
+
+  $final_results = array(
+    "ihd_question" => array("subject" => "Implementación de herramientas digitales", "correct" => 0, "incorrect" => 0),
+    "macc_question" => array("subject" => "Medio Ambiente y Cambio climático", "correct" => 0, "incorrect" => 0),
+    "dhd_question" => array("subject" => "Derechos Humanos y Democracia", "correct" => 0, "incorrect" => 0),
+    "elmt_question" => array("subject" => "Economía local y mundo del trabajo", "correct" => 0, "incorrect" => 0)
+  );
+
+  foreach($theme_lines as $line) {
+    foreach($form_sum as $res_key => $res_val) {
+      if (str_contains($res_key, $line)) {
+        if ($res_val) {
+          $final_results[$line]['correct'] = $final_results[$line]['correct'] + 1;
+        } else {
+          $final_results[$line]['incorrect'] = $final_results[$line]['incorrect'] + 1;
+        }
+      }
+    }
+  }
+
+  $variables['element']['#form_results'] = $final_results;
 }

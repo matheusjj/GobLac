@@ -1,0 +1,48 @@
+{#
+/**
+ * @file
+ * Default theme implementation to webform confirmation.
+ *
+ * Available variables:
+ * - progress: Progress bar.
+ * - message: Confirmation message.
+ * - back_url: URL to the previous webform submission.
+ *
+ * @see template_preprocess_webform_confirmation()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set bg_img = element['#bg_img_url'] %}
+{% set end_msg = element['#end_msg'] %}
+
+{{ attach_library('webform/webform.confirmation') }}
+
+<div{{ attributes.addClass('webform-confirmation') }}>
+  <div class="quiz-results" style="background-image: url({{bg_img}});">
+    <h2 class="res-msg">{{ end_msg }}</h2>
+    {% for result in element['#form_results'] %}
+      <div class="results">
+        <div>
+          <div class="title">
+            {{ result['subject'] }}
+            <span>{{ result['correct'] + result['incorrect'] }} {{ " Preguntas"|t }}</span>
+          </div>
+          <div class="answers">
+            <p><i class="fa-solid fa-circle-check"></i> {{ "Preguntas que acertaste"|t }}</p> 
+            <span>{{ result['correct'] }}</span>
+          </div>
+          <div class="answers">
+            <p><i class="fa-solid fa-circle-xmark"></i> {{ "No acertaste"|t }}</p>
+            <span>{{ result['incorrect'] }}</span>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    <div class="action-links">
+      <a class="to-home" href="{{ url('<front>') }}">{{ "Volver a la página principal"|t }}</a>
+      <a class="to-quiz" href="{{ back_url }}" rel="prev"{{ back_attributes }}>{{ "Jugar de nuevo"|t }}</a>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,0 @@
-services:
-  good_habits.good_habits_service:
-    class: \Drupal\good_habits\Service\GoodHabitsService
-    arguments: []
