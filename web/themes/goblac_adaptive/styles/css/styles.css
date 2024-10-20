@@ -263,6 +263,86 @@ input[type="checkbox"] {
     }
   }
 
+  .node--view-mode-full {
+    @apply m-0;
+  }
+
+  .meeting-view {
+    @apply flex flex-row w-full items-center justify-between px-2 lg:px-28 py-16;
+
+    .text-section {
+      @apply max-w-[535px];
+    }
+
+    h2 {
+      @apply font-bold text-5xl line-clamp-2;
+    }
+
+    span {
+      @apply font-normal text-base line-clamp-6;
+    }
+
+    img {
+      @apply w-[720px] h-[570px] hidden lg:block;
+    }
+  }
+
+  .meeting-view-block {
+    @apply flex flex-col w-full px-2 lg:px-28 py-16;
+
+    .view-header {
+      @apply flex flex-col w-full justify-center;
+
+      p {
+        @apply flex w-full justify-center text-4xl font-bold;
+      }
+
+      h4 {
+        @apply flex w-full justify-center text-base font-normal;
+      }
+    }
+
+    .view-rows {
+      @apply grid grid-cols-2 lg:grid-cols-3 gap-4 mt-8;
+    }
+
+    .views-row {
+      @apply flex flex-col w-full justify-center p-4 border-2 border-gray-100 rounded;
+    }
+
+    .views-field-field-mt-image {
+      @apply flex justify-center w-full mb-8;
+    }
+
+    .views-field-field-mt-title .field-content {
+      @apply text-2xl font-bold overflow-hidden max-w-[430px] w-full line-clamp-2;
+    }
+
+    .views-field-field-mt-summary {
+      @apply font-normal text-base max-w-[430px] w-full h-full line-clamp-5 mt-4;
+    }
+
+    .views-field-field-mt-date {
+      @apply my-8;
+    }
+
+    .views-field-field-mt-link {
+      @apply hidden;
+    }
+
+    .views-field-view-node {
+      @apply flex w-full justify-center bg-[color:var(--primary-color)] py-1 rounded;
+
+      a {
+        @apply text-white font-bold;
+      }
+    }
+
+    .pager {
+      @apply hidden;
+    }
+  }
+
   .gh-view-block-home {
     @apply flex flex-row w-full px-2 lg:px-28 py-16;
 
@@ -1317,7 +1397,7 @@ input[type="checkbox"] {
     }
 
     .quiz-question {
-      @apply w-full max-w-[592px] ;
+      @apply w-full max-w-[592px];
     }
 
     .quiz-header {
@@ -1455,7 +1535,7 @@ input[type="checkbox"] {
         .fa-circle-xmark {
           @apply text-[#ffa8a2] pr-2;
         }
-        
+
         span {
           @apply font-bold;
         }
@@ -1464,13 +1544,13 @@ input[type="checkbox"] {
 
     .action-links {
       @apply flex flex-row w-full justify-between max-w-[827px] pt-5 pb-64;
-      
+
       .to-home {
         @apply bg-transparent text-white font-semibold p-2 h-auto border border-white rounded-md text-center;
       }
 
       .to-quiz {
-        @apply bg-[color:var(--primary-color)] text-white font-semibold py-2 px-5 h-auto rounded-md text-center; 
+        @apply bg-[color:var(--primary-color)] text-white font-semibold py-2 px-5 h-auto rounded-md text-center;
       }
     }
   }
