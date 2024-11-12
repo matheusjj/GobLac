@@ -285,6 +285,10 @@ input[type="checkbox"] {
     img {
       @apply w-[720px] h-[570px] hidden lg:block;
     }
+
+    .mt-pdf {
+      @apply flex w-full text-white text-center justify-center font-bold py-3 px-4 rounded-md bg-[color:var(--primary-color)] mt-8;
+    }
   }
 
   .meeting-view-block {

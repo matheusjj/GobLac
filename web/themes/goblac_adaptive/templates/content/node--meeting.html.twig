@@ -129,14 +129,16 @@
               <div class="info-section">
                 <h2>{{- content.field_mt_title -}}</h2>
                 <p>{{- content.field_mt_summary -}}</p>
-
-                {# {% if content.field_mt_link|render %}
-                    {{- content.field_mt_link }}
-                {% endif %} #}
               </div>
+
+                {% if content.field_mt_file|render %}
+                  <a class="mt-pdf" href={{content.field_mt_file[0]['#markup']}}>Descargar PDF</a>
+                {% endif %}
             </div>
-            <div>
-              {{- content.field_mt_image -}}
+            <div class="meeting-info-images">
+              {% if content.field_mt_qr_code|render %}
+                {{content.field_mt_qr_code}}
+              {% endif %}
             </div>
           </div>
         </div>
